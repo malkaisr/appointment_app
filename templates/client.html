@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>קביעת תור אייל הספר</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>קביעת תור אייל הספר</h1>
+        <form action="{{ url_for('book_appointment') }}" method="post">
+            <div class="form-group">
+                <label for="time">שעת תספורת:</label>
+                <select name="time" id="time" required>
+                    {% for slot in available_slots %}
+                        <option value="{{ slot }}">{{ slot }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="num_appointments">מספר תורים:</label>
+                <input type="number" id="num_appointments" name="num_appointments" min="1" max="3" value="1" required>
+            </div>
+            <div class="form-group">
+                <label for="name">שם:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">מספר טלפון:</label>
+                <input type="text" id="phone_number" name="phone_number" required>
+            </div>
+            <div class="form-group">
+                <label for="haircut_type">תספורת:</label>
+                <select name="haircut_type" id="haircut_type">
+                    <option value="adult">מבוגר</option>
+                    <option value="child">ילד</option>
+                </select>
+            </div>
+            <button type="submit">קבע תור</button>
+        </form>
+    </div>
+</body>
+</html>

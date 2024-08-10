@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Barber Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container admin-container">
+        <h1>Appointments</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>שעה</th>
+                    <th>מספר טלפון</th>
+                    <th>מבוגר/ילד</th>
+                    <th>ביטול תור</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appt in appointments %}
+                    <tr>
+                        <td>{{ appt['time'] }}</td>
+                        <td>{{ appt['phone_number'] }}</td>
+                        <td>{{ appt['haircut_type'] }}</td>
+                        <td>
+                            <form action="{{ url_for('cancel_appointment', phone_number=appt['phone_number']) }}" method="post">
+                                <button type="submit" class="btn btn-danger">Cancel</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Update Current Appointment</h2>
+        <form action="{{ url_for('update_current') }}" method="post">
+            <div class="form-group">
+                <label for="current_appointment">Current Appointment:</label>
+                <input type="text" name="current_appointment" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</body>
+</html>
